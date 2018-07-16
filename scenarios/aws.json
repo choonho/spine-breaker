@@ -1,0 +1,25 @@
+{
+    "resource": [
+        {
+            "name": "my-aws",
+            "provider": "aws"
+        }
+    ],
+    "breaker": [
+        {
+            "name": "host-killer",
+            "type": "server",
+            "hostname": "webserver*",
+            "resource": "my-aws",
+            "scheduler": "random"
+        },
+        {
+            "name": "my apache",
+            "type": "process",
+            "process_name": "httpd",
+            "server": "host-killer",
+            "scheduler": "uniform"
+        }
+    ]
+}
+
